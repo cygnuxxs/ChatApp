@@ -16,12 +16,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 socketio = SocketIO(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-friendship = db.Table(
-    'friendship',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('friend_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
-
-)
 
 class Friendship(db.Model):
     __tablename__ = 'friends'
