@@ -1,0 +1,78 @@
+{% include 'header.html' %}
+
+<div class="container-fluid bg-container" id="signupForm">
+    <div class="row">
+        <div class="col-md-8 d-flex align-items-center">
+            <div>
+                <h1 class="heading">Roll the Carpet.!</h1>
+                <a href="{{ url_for('signup') }}" style="text-decoration: none;">
+                    <p class="desc">Skip the lag ?</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md login-div">
+            <div style="margin: 50px 0 10px 0;">
+                <p style="font-size: 36px; font-weight: 600;">Signup</p>
+                <p>Just some details to get you in.!</p>
+            </div>
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.name(class = 'form-control my-4', placeholder = "Name") }}
+                {{ form.email(class = 'form-control my-4', placeholder = "Email") }}
+                {% if err %}
+                <p style="color: #dc71ff;">{{ err }}</p>
+                {% endif %}
+                {{ form.username(class = 'form-control my-4', placeholder = "Username", id = "username", onkeyup =
+                "checkUsername()") }}
+                <div class="text-center" style="color: #63f16f;" id="usernameStatus"></div>
+                {{ form.pword(class = 'form-control my-4', placeholder = "Password") }}
+                {{ form.cnfword(class = 'form-control my-4', placeholder = "Confirm Password") }}
+                <button class="btn mb-4" type="submit">Signup</button>
+            </form>
+            <div class="row text-center" style="margin: 10px 0;">
+                <div class="col">
+                    <hr>
+                </div>
+                <div class="col-auto d-flex align-items-center" style="color: #7c7c7c; font-size: 0.9rem;">Or</div>
+                <div class="col">
+                    <hr>
+                </div>
+            </div>
+            <div class="media-handles text-center">
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/google.svg') }}"
+                        alt=""></a>
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/facebook.svg') }}"
+                        alt=""></a>
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/github.svg') }}"
+                        alt=""></a>
+            </div>
+            <div class="text-center media-handles">
+                <a href="{{ url_for('login') }}">Already have an account ? Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+<script>
+    function checkUsername() {
+        var username = document.getElementById("username").value;
+        if (username.length >= 4) {
+            $.ajax({
+                type: "POST",
+                url: "/checkUsername",
+                data: JSON.stringify({ username: username }),
+                contentType: "application/json",
+                success: function (response) {
+                    if (response.available) {
+                        $("#usernameStatus").text("Username is available.");
+                    } else {
+                        $("#usernameStatus").text("Username is already taken.");
+                    }
+                }
+            })
+        }
+    }
+</script>

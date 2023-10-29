@@ -1,0 +1,49 @@
+{% include 'header.html' %}
+
+<div class="container-fluid addProfile d-flex align-items-center justify-content-center" style="background-color: black; height: 100vh;">
+    <div class="">
+        <div class="login-div">
+            <div style="margin: 50px 0 10px 0;">
+                <p style="font-size: 36px; font-weight: 600;">Add Details</p>
+                <p>This is the last step.!</p>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="profilephoto" style="margin: 0 auto;">
+                    <a href="javascript:void(0);" id = 'profile-link'>
+                        <img style="width: 10rem; height: 10rem; object-fit: cover; border-radius: 50%;" src="{{ url_for('static', filename = 'images/profil.png') }}" alt="">
+                        <input type="file" name = 'profile-photo' id = 'profile-upload' accept="image/*" style="display: none;">
+                    </a>
+                </div>
+                {{ form.name.label(style = 'color:#7c7c7c;') }}
+                {{ form.name(style = 'margin:0 0 1rem 0 !important;', class = 'form-control my-4', value = user.name) }}
+                {{ form.description.label(style = 'color:#7c7c7c;') }}
+                {{ form.description(style = 'margin:0 0 1rem 0 !important;', class = 'form-control my-4', value = "Available" if not user.description else user.description ) }}
+                <button class="btn mb-4" type="submit">Let's Dig IN!.</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+</body></html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var profileLink = document.getElementById('profile-link');
+        var profileUpload = document.getElementById('profile-upload');
+        
+        profileLink.addEventListener('click', function() {
+            profileUpload.click();
+        });
+        profileUpload.addEventListener('change', function() {
+            var selectedFile = this.files[0];
+            if (selectedFile) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    profileLink.querySelector('img').src = e.target.result;
+                }
+                reader.readAsDataURL(selectedFile);
+            }
+        })
+    })
+</script>

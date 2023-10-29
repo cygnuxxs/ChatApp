@@ -1,0 +1,51 @@
+{% include 'header.html' %}
+<div class="container-fluid bg-container" id="loginForm">
+    <div class="row">
+        <div class="col-md-8 d-flex align-items-center">
+            <div>
+                <h1 class="heading">Welcome Back .!</h1>
+                <p class="desc">Skip the lag ?</p>
+            </div>
+        </div>
+        <div class="col-md login-div">
+            <div style="margin: 50px 0 10px 0;">
+                <p style="font-size: 36px; font-weight: 600;">Login</p>
+                <p>Glad you're back.!</p>
+            </div>
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.username(class = "form-control my-4", placeholder = "Username") }}
+                {{ form.password(class = "form-control my-1", placeholder = "Password") }}
+                {% if err %}
+                    <p style="color:#ff8295; margin: 1rem 0;">{{ err }}</p>
+                {% endif %}
+                <button class="btn mt-4" type="submit">Login</button>
+            </form>
+            <div class="text-center" style="margin: 10px 0;">
+                <a href="{{ url_for('signup') }}">Forgot Password ?</a>
+                <div class="row" style="margin: 10px 0;">
+                    <div class="col">
+                        <hr>
+                    </div>
+                    <div class="col-auto d-flex align-items-center" style="color: #7c7c7c; font-size: 0.9rem;">Or</div>
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="media-handles text-center">
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/google.svg') }}"
+                        alt=""></a>
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/facebook.svg') }}"
+                        alt=""></a>
+                <a href=""><img class="media-img mx-2" src="{{ url_for('static', filename = 'images/github.svg') }}"
+                        alt=""></a>
+            </div>
+            <div class="text-center media-handles">
+                <a href="{{ url_for('signup') }}">Did'nt have an account ? Signup</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

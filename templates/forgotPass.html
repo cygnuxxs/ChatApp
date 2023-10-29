@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+<div class="container-fluid bg-container" style="display: none;" id="forgotPass">
+    <div class="row">
+        <div class="col-md-8 d-flex align-items-center">
+            <div>
+                <h1 class="heading">No Worries.!!</h1>
+                <a href="javascript:void(0);" onclick="showLogin()">
+                    <p class="desc">Take Me Back.!</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md login-div">
+            <div style="margin: 50px 0 10px 0;">
+                <p style="font-size: 36px; font-weight: 600;">Forgot Password ?</p>
+                <p>Please enter your email</p>
+            </div>
+            <form action="" method="POST">
+                <input type="email" class="form-control my-4" placeholder="example@mail.com">
+                <button class="btn mb-5" type="submit">Reset Password</button>
+            </form>
+            <div class="text-center media-handles">
+                <a href="javascript:void(0);" onclick="showSignup()">Did'nt have an account ? Signup</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

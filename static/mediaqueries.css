@@ -1,0 +1,9 @@
+@media (max-width:991px) {
+    .heading {
+        margin-top: 50px;
+    }
+    .bg-container {
+        flex-direction: column;
+        height: fit-content;
+    }
+}

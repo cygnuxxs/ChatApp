@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'dashboard.css') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>{{title}}</title>
+</head>
+
+<body>
+    <nav class="navBar">
+        <ul class="navBar-nav">
+            <li class="logo">
+                <a href="#" class="navLink">
+                    <span class="link-text logo-text">ChatApp</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fa-secondary"
+                            d="M17 17C19.7614 17 22 14.7614 22 12C22 9.23858 19.7614 7 17 7C14.2386 7 12 9.23858 12 12C12 14.7614 14.2386 17 17 17Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M12 22C14.7614 22 17 19.7614 17 17C17 14.2386 14.7614 12 12 12C9.23858 12 7 14.2386 7 17C7 19.7614 9.23858 22 12 22Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path class="fa-secondary"
+                            d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M7 17C9.76142 17 12 14.7614 12 12C12 9.23858 9.76142 7 7 7C4.23858 7 2 9.23858 2 12C2 14.7614 4.23858 17 7 17Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </li>
+
+            <li class="navItem">
+                <a href="#" onclick="openTab(this,'profileDiv')" class="navLink Active">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z"
+                            class="fa-secondary" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z"
+                            class="fa-primary" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+
+                    <span class="link-text">Profile</span>
+                </a>
+            </li>
+
+            <li class="navItem">
+                <a href="#" onclick="openTab(this, 'messageDiv')" class="navLink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fa-secondary"
+                            d="M22 6.25V11.35C22 12.62 21.58 13.69 20.83 14.43C20.09 15.18 19.02 15.6 17.75 15.6V17.41C17.75 18.09 16.99 18.5 16.43 18.12L15.46 17.48C15.55 17.17 15.59 16.83 15.59 16.47V12.4C15.59 10.36 14.23 9 12.19 9H5.39999C5.25999 9 5.13 9.01002 5 9.02002V6.25C5 3.7 6.7 2 9.25 2H17.75C20.3 2 22 3.7 22 6.25Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M15.59 12.4V16.47C15.59 16.83 15.55 17.17 15.46 17.48C15.09 18.95 13.87 19.87 12.19 19.87H9.47L6.45 21.88C6 22.19 5.39999 21.86 5.39999 21.32V19.87C4.37999 19.87 3.53 19.53 2.94 18.94C2.34 18.34 2 17.49 2 16.47V12.4C2 10.5 3.18 9.19002 5 9.02002C5.13 9.01002 5.25999 9 5.39999 9H12.19C14.23 9 15.59 10.36 15.59 12.4Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                    <span class="link-text">Messages</span>
+                </a>
+            </li>
+
+            <li class="navItem">
+                <a href="#" onclick="openTab(this, 'groupsDiv')" class="navLink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fa-secondary"
+                            d="M18 7.16C17.94 7.15 17.87 7.15 17.81 7.16C16.43 7.11 15.33 5.98 15.33 4.58C15.33 3.15 16.48 2 17.91 2C19.34 2 20.49 3.16 20.49 4.58C20.48 5.98 19.38 7.11 18 7.16Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M16.9699 14.44C18.3399 14.67 19.8499 14.43 20.9099 13.72C22.3199 12.78 22.3199 11.24 20.9099 10.3C19.8399 9.59004 18.3099 9.35003 16.9399 9.59003"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-secondary"
+                            d="M5.96998 7.16C6.02998 7.15 6.09998 7.15 6.15998 7.16C7.53998 7.11 8.63998 5.98 8.63998 4.58C8.63998 3.15 7.48998 2 6.05998 2C4.62998 2 3.47998 3.16 3.47998 4.58C3.48998 5.98 4.58998 7.11 5.96998 7.16Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M6.99994 14.44C5.62994 14.67 4.11994 14.43 3.05994 13.72C1.64994 12.78 1.64994 11.24 3.05994 10.3C4.12994 9.59004 5.65994 9.35003 7.02994 9.59003"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-secondary"
+                            d="M12 14.63C11.94 14.62 11.87 14.62 11.81 14.63C10.43 14.58 9.32996 13.45 9.32996 12.05C9.32996 10.62 10.48 9.46997 11.91 9.46997C13.34 9.46997 14.49 10.63 14.49 12.05C14.48 13.45 13.38 14.59 12 14.63Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M9.08997 17.78C7.67997 18.72 7.67997 20.26 9.08997 21.2C10.69 22.27 13.31 22.27 14.91 21.2C16.32 20.26 16.32 18.72 14.91 17.78C13.32 16.72 10.69 16.72 9.08997 17.78Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="link-text">Groups</span>
+                </a>
+            </li>
+            </li>
+            <li class="navItem">
+                <a href="#" onclick="openTab(this, 'addDiv')" class="navLink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fa-secondary"
+                            d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-primary" d="M8 12H16" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path class="fa-secondary" d="M12 16V8" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="link-text">Add</span>
+                </a>
+            </li>
+            <li class="navItem">
+                <a href="#" onclick="openTab(this, 'settingsDiv')" class="navLink">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fa-secondary"
+                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path class="fa-primary"
+                            d="M2 12.8799V11.1199C2 10.0799 2.85 9.21994 3.9 9.21994C5.71 9.21994 6.45 7.93994 5.54 6.36994C5.02 5.46994 5.33 4.29994 6.24 3.77994L7.97 2.78994C8.76 2.31994 9.78 2.59994 10.25 3.38994L10.36 3.57994C11.26 5.14994 12.74 5.14994 13.65 3.57994L13.76 3.38994C14.23 2.59994 15.25 2.31994 16.04 2.78994L17.77 3.77994C18.68 4.29994 18.99 5.46994 18.47 6.36994C17.56 7.93994 18.3 9.21994 20.11 9.21994C21.15 9.21994 22.01 10.0699 22.01 11.1199V12.8799C22.01 13.9199 21.16 14.7799 20.11 14.7799C18.3 14.7799 17.56 16.0599 18.47 17.6299C18.99 18.5399 18.68 19.6999 17.77 20.2199L16.04 21.2099C15.25 21.6799 14.23 21.3999 13.76 20.6099L13.65 20.4199C12.75 18.8499 11.27 18.8499 10.36 20.4199L10.25 20.6099C9.78 21.3999 8.76 21.6799 7.97 21.2099L6.24 20.2199C5.33 19.6999 5.02 18.5299 5.54 17.6299C6.45 16.0599 5.71 14.7799 3.9 14.7799C2.85 14.7799 2 13.9199 2 12.8799Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                    <span class="link-text">Settings</span>
+                </a>
+
+            <li class="navItem" id="themeButton">
+                <a href="#" class="navLink">
+                    <svg class="theme-icon" id="lightIcon" aria-hidden="true" focusable="false" data-prefix="fad"
+                        data-icon="moon-stars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                        class="svg-inline--fa fa-moon-stars fa-w-16 fa-7x">
+                        <g class="fa-group">
+                            <path fill="currentColor"
+                                d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z"
+                                class="fa-secondary"></path>
+                            <path fill="currentColor"
+                                d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"
+                                class="fa-primary"></path>
+                        </g>
+                    </svg>
+                    <svg class="theme-icon" id="solarIcon" aria-hidden="true" focusable="false" data-prefix="fad"
+                        data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                        class="svg-inline--fa fa-sun fa-w-16 fa-7x">
+                        <g class="fa-group">
+                            <path fill="currentColor"
+                                d="M502.42 240.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.41-94.8a17.31 17.31 0 0 0-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4a17.31 17.31 0 0 0 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.41-33.5 47.3 94.7a17.31 17.31 0 0 0 31 0l47.31-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3a17.33 17.33 0 0 0 .2-31.1zm-155.9 106c-49.91 49.9-131.11 49.9-181 0a128.13 128.13 0 0 1 0-181c49.9-49.9 131.1-49.9 181 0a128.13 128.13 0 0 1 0 181z"
+                                class="fa-secondary"></path>
+                            <path fill="currentColor" d="M352 256a96 96 0 1 1-96-96 96.15 96.15 0 0 1 96 96z"
+                                class="fa-primary"></path>
+                        </g>
+                    </svg>
+                    <svg class="theme-icon" id="darkIcon" aria-hidden="true" focusable="false" data-prefix="fad"
+                        data-icon="sunglasses" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                        class="svg-inline--fa fa-sunglasses fa-w-18 fa-7x">
+                        <g class="fa-group">
+                            <path fill="currentColor"
+                                d="M574.09 280.38L528.75 98.66a87.94 87.94 0 0 0-113.19-62.14l-15.25 5.08a16 16 0 0 0-10.12 20.25L395.25 77a16 16 0 0 0 20.22 10.13l13.19-4.39c10.87-3.63 23-3.57 33.15 1.73a39.59 39.59 0 0 1 20.38 25.81l38.47 153.83a276.7 276.7 0 0 0-81.22-12.47c-34.75 0-74 7-114.85 26.75h-73.18c-40.85-19.75-80.07-26.75-114.85-26.75a276.75 276.75 0 0 0-81.22 12.45l38.47-153.8a39.61 39.61 0 0 1 20.38-25.82c10.15-5.29 22.28-5.34 33.15-1.73l13.16 4.39A16 16 0 0 0 180.75 77l5.06-15.19a16 16 0 0 0-10.12-20.21l-15.25-5.08A87.95 87.95 0 0 0 47.25 98.65L1.91 280.38A75.35 75.35 0 0 0 0 295.86v70.25C0 429 51.59 480 115.19 480h37.12c60.28 0 110.38-45.94 114.88-105.37l2.93-38.63h35.76l2.93 38.63c4.5 59.43 54.6 105.37 114.88 105.37h37.12C524.41 480 576 429 576 366.13v-70.25a62.67 62.67 0 0 0-1.91-15.5zM203.38 369.8c-2 25.9-24.41 46.2-51.07 46.2h-37.12C87 416 64 393.63 64 366.11v-37.55a217.35 217.35 0 0 1 72.59-12.9 196.51 196.51 0 0 1 69.91 12.9zM512 366.13c0 27.5-23 49.87-51.19 49.87h-37.12c-26.69 0-49.1-20.3-51.07-46.2l-3.12-41.24a196.55 196.55 0 0 1 69.94-12.9A217.41 217.41 0 0 1 512 328.58z"
+                                class="fa-secondary"></path>
+                            <path fill="currentColor"
+                                d="M64.19 367.9c0-.61-.19-1.18-.19-1.8 0 27.53 23 49.9 51.19 49.9h37.12c26.66 0 49.1-20.3 51.07-46.2l3.12-41.24c-14-5.29-28.31-8.38-42.78-10.42zm404-50l-95.83 47.91.3 4c2 25.9 24.38 46.2 51.07 46.2h37.12C489 416 512 393.63 512 366.13v-37.55a227.76 227.76 0 0 0-43.85-10.66z"
+                                class="fa-primary"></path>
+                        </g>
+                    </svg>
+                    <span class="link-text">Themify</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="tabContent" id="profileDiv">
+            <h1>CSS is Cool</h1>
+
+            <p>
+                I'm baby kale chips affogato ennui lumbersexual, williamsburg paleo quinoa
+                iceland normcore tumeric. Kitsch coloring book retro, seitan schlitz
+                tattooed biodiesel vexillologist neutra. Synth mumblecore deep v, umami
+                selfies normcore gluten-free snackwave. Seitan ramps drinking vinegar
+                venmo keytar, humblebrag VHS post-ironic tacos godard pour-over.
+            </p>
+            <p>
+                Sartorial kogi taxidermy, kickstarter synth yr irony ennui everyday carry
+                retro helvetica stumptown cloud bread squid echo park. Etsy cloud bread
+                sartorial quinoa tacos beard mumblecore shaman tumblr pop-up. Twee retro
+                fingerstache af helvetica pabst 8-bit leggings taiyaki portland ramps tbh
+                tumblr vinyl. Neutra humblebrag bushwick portland subway tile plaid, offal
+                scenester flexitarian cliche squid small batch palo santo. Palo santo meh
+                adaptogen +1 3 wolf moon, listicle brunch ethical fanny pack everyday
+                carry fam. Offal fingerstache taxidermy, man bun venmo PBR&amp;B helvetica
+                thundercats everyday carry tote bag artisan cray wolf jianbing.
+            </p>
+            <p>
+                Taxidermy thundercats whatever austin. VHS helvetica ethical, dreamcatcher
+                enamel pin YOLO shabby chic locavore man bun crucifix pabst chillwave
+                pop-up vegan. Air plant mlkshk ethical echo park tumeric, whatever
+                crucifix godard scenester locavore pork belly yuccie vape. +1 gochujang
+                put a bird on it, pork belly whatever selfies vaporware occupy banh mi
+                normcore VHS. Cornhole normcore hashtag tilde. Hell of yr try-hard DIY raw
+                denim banjo, enamel pin irony polaroid copper mug tofu. Dreamcatcher lomo
+                literally 90's before they sold out, 3 wolf moon banh mi seitan chambray
+                cliche offal tote bag occupy pug.
+            </p>
+            <p>
+                Post-ironic hot chicken salvia yr yuccie ugh cold-pressed keffiyeh franzen
+                viral taxidermy mustache slow-carb crucifix vape. Taiyaki yuccie hell of
+                tacos PBR&amp;B, kitsch meggings tbh truffaut kickstarter mixtape af kogi.
+                Fingerstache vegan tofu waistcoat gentrify cray. Drinking vinegar 3 wolf
+                moon health goth craft beer master cleanse. Letterpress health goth 8-bit
+                chillwave craft beer brooklyn. Chicharrones master cleanse 8-bit,
+                mumblecore copper mug messenger bag poutine lomo kale chips flannel. Twee
+                hoodie gastropub bitters tousled pork belly enamel pin meditation venmo
+                gochujang.
+            </p>
+            <p>
+                Next level selfies cronut ethical. Tofu tumblr you probably haven't heard
+                of them, man braid literally forage swag chillwave. Pug yr flannel
+                tumeric. Coloring book yr chillwave snackwave, shoreditch shaman gentrify
+                typewriter tumeric DIY copper mug small batch. Scenester waistcoat YOLO
+                hexagon kombucha poke 8-bit meditation. Selvage scenester forage
+                williamsburg. Hoodie fingerstache tacos mustache, hashtag quinoa next
+                level sartorial craft beer retro disrupt lo-fi.
+            </p>
+            <p>
+                YOLO twee keytar farm-to-table flexitarian cardigan polaroid lumbersexual
+                adaptogen drinking vinegar echo park dreamcatcher. Brunch shoreditch
+                dreamcatcher iPhone knausgaard plaid edison bulb letterpress ethical yr
+                fanny pack. Typewriter portland woke glossier cronut, post-ironic migas
+                gentrify letterpress cray brunch lyft 8-bit master cleanse. Pitchfork
+                thundercats organic pour-over unicorn lomo.
+            </p>
+            <p>
+                Ugh yr tacos aesthetic everyday carry, tumeric selvage cliche skateboard.
+                Wolf truffaut enamel pin vexillologist poutine. Hoodie roof party pabst,
+                cardigan letterpress af disrupt +1 subway tile chillwave live-edge
+                meggings next level readymade. Master cleanse gentrify hashtag, stumptown
+                fam single-origin coffee occupy dreamcatcher air plant viral vexillologist
+                enamel pin meggings. Tumblr chambray pickled microdosing austin scenester
+                green juice.
+            </p>
+            <p>
+                Austin four dollar toast church-key, vaporware hoodie edison bulb jean
+                shorts sustainable williamsburg plaid helvetica scenester lomo humblebrag.
+                Meditation tumblr kickstarter ennui williamsburg taiyaki pabst pour-over.
+                8-bit godard cred, chillwave enamel pin skateboard you probably haven't
+                heard of them. Meditation before they sold out single-origin coffee swag
+                try-hard jianbing slow-carb shaman leggings. Palo santo shabby chic
+                whatever man bun. Master cleanse wayfarers single-origin coffee pork belly
+                cronut, normcore cliche jianbing before they sold out tousled shabby chic
+                af pop-up gentrify. Direct trade la croix vexillologist jianbing,
+                flexitarian selvage try-hard stumptown polaroid shaman wayfarers poke
+                ramps food truck swag.
+            </p>
+            <p>
+                Pok pok lumbersexual wayfarers, direct trade leggings poutine truffaut
+                kitsch. Seitan aesthetic master cleanse squid coloring book banh mi YOLO
+                vegan locavore vexillologist readymade next level pop-up edison bulb.
+                Selvage knausgaard literally, quinoa photo booth 3 wolf moon microdosing
+                freegan yuccie. Truffaut gentrify lomo put a bird on it waistcoat. Ugh
+                austin distillery, tbh actually pork belly snackwave artisan mixtape
+                quinoa vexillologist pok pok polaroid listicle readymade.
+            </p>
+            <p>
+                Hammock letterpress prism dreamcatcher truffaut shabby chic vice
+                cold-pressed. Franzen pug fashion axe before they sold out, tumblr irony
+                kogi actually af bushwick banh mi. Snackwave bicycle rights tofu
+                dreamcatcher tote bag pour-over meditation raw denim fanny pack. Pop-up
+                retro taiyaki meditation twee gastropub VHS etsy. Semiotics gochujang
+                street art normcore, edison bulb farm-to-table pour-over taxidermy
+                brooklyn.
+            </p>
+        </div>
+        <div class="tabContent" id="messageDiv">
+            <div class="messagesDiv">
+                <nav class="msgNav">
+                    <h1 class="header">Messages</h1>
+                    <div class="search-field">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fa-secondary" d="M14 5H20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-primary" d="M14 8H17" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-secondary"
+                                d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path class="fa-primary" d="M22 22L20 20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span><input class="input-control" type="text" placeholder="Search"></span>
+                    </div>
+                    <div class="msgDiv">
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="chatDiv">
+
+            </div>
+        </div>
+        <div class="tabContent" id="groupsDiv">
+            <div class="messagesDiv">
+                <nav class="msgNav">
+                    <h1 class="header">Groups</h1>
+                    <div class="search-field">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fa-secondary" d="M14 5H20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-primary" d="M14 8H17" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-secondary"
+                                d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path class="fa-primary" d="M22 22L20 20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span><input class="input-control" type="text" placeholder="Search"></span>
+                    </div>
+                    <div class="msgDiv">
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="msg">
+                            <img class="img-control" src="{{ url_for('static', filename = 'images/clipboard.png') }}" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo">
+                                    <p class="sender">Ashok Atragadda</p>
+                                    <p class="message">Hi How are You? This is not Bad at First but it will take some
+                                        time to
+                                        Align </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="tabContent" id="addDiv" style="margin-left: 2rem;">
+            <div class="messagesDiv">
+                <nav class="msgNav">
+                    <h1 class="header">Add Friends</h1>
+                    <div class="search-field">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fa-secondary" d="M14 5H20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-primary" d="M14 8H17" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path class="fa-secondary"
+                                d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path class="fa-primary" d="M22 22L20 20" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span><input id="username" class="input-control" type="text" placeholder="Search"></span>
+                    </div>
+                        <div class="msg" id = "queriedUser" style="display: none;">
+                            <img class="img-control" id = "userDp" src="" alt="">
+                            <a href="" class="anchor-msg">
+                                <div class="msgInfo" style="width: auto;">
+                                    <p class="sender" id="user"></p>
+                                    <p class="sender" style="font-size: 0.8rem;" id = "usernameName"></p>
+                                    <p class="message" id ="desc"></p>
+                                    <!-- <button class="addButton">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="fa-secondary" d="M11.46 13.73C13.0119 13.73 14.27 12.4719 14.27 10.92C14.27 9.36806 13.0119 8.10999 11.46 8.10999C9.9081 8.10999 8.65002 9.36806 8.65002 10.92C8.65002 12.4719 9.9081 13.73 11.46 13.73Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class = "fa-primary" d="M16.65 20.2C16.65 17.87 14.33 15.97 11.46 15.97C8.59002 15.97 6.27002 17.86 6.27002 20.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class="fa-secondary" d="M21 12.5C21 17.75 16.75 22 11.5 22C6.25 22 2 17.75 2 12.5C2 7.25 6.25 3 11.5 3C12.81 3 14.06 3.25999 15.2 3.73999C15.07 4.13999 15 4.56 15 5C15 5.75 15.21 6.46 15.58 7.06C15.78 7.4 16.04 7.70997 16.34 7.96997C17.04 8.60997 17.97 9 19 9C19.44 9 19.86 8.92998 20.25 8.78998C20.73 9.92998 21 11.19 21 12.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class = "fa-primary" d="M23 5C23 5.32 22.96 5.62999 22.88 5.92999C22.79 6.32999 22.63 6.72 22.42 7.06C21.94 7.87 21.17 8.49998 20.25 8.78998C19.86 8.92998 19.44 9 19 9C17.97 9 17.04 8.60997 16.34 7.96997C16.04 7.70997 15.78 7.4 15.58 7.06C15.21 6.46 15 5.75 15 5C15 4.56 15.07 4.13999 15.2 3.73999C15.39 3.15999 15.71 2.64002 16.13 2.21002C16.86 1.46002 17.88 1 19 1C20.18 1 21.25 1.51002 21.97 2.33002C22.61 3.04002 23 3.98 23 5Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class="fa-secondary" d="M20.49 4.97998H17.51" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class = "fa-primary" d="M19 3.52002V6.51001" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg> -->
+                                            
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                    <div id = "userNotFound"></div>
+                </nav>
+            </div>
+        </div>
+        <div class="tabContent" id="settingsDiv">
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        Logout
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="logoutModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are You Sure That You Want To Confirm Logout ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <a href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger"
+                                        style="text-decoration: none;">Confirm Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
