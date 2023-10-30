@@ -17,13 +17,6 @@ socketio = SocketIO(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 
-class Friendship(db.Model):
-    __tablename__ = 'friends'
-    id = db.Column(db.Integer, primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    friend_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    status = db.Column(db.String(15), default = "pending")
-
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -34,7 +27,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(250), nullable=False, unique=True)
     password = db.Column(db.String(250), nullable=False)
 
-    friends = db.relationship('Friendship', backref = 'users', lazy = 'dynamic')
 
 with app.app_context() as con:
     db.create_all()
